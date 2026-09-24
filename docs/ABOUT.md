@@ -18,3 +18,9 @@ It sits between a raw terminal and full observability stacks:
 Suggested repository topics:
 
 `cli` · `nodejs` · `developer-tools` · `debugging` · `observability` · `logging` · `devtools` · `command-line` · `html-report` · `local-first` · `zero-dependencies` · `timeline` · `terminal`
+
+## 中文检索提示
+
+GitHub Topics 基本是英文；中文用户更容易通过 README 正文命中。完整中文说明见 [README.zh-CN.md](../README.zh-CN.md)。
+
+常见中文检索词示例：命令行工具、本地调试、日志可视化、测试失败排查、构建日志、HTML 报告、开发者工具、零依赖 CLI。

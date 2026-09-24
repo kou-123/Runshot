@@ -14,6 +14,8 @@ Useful when you need a lightweight alternative to scrolling terminal buffers, di
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org/)
 [![Zero dependencies](https://img.shields.io/badge/deps-0-blue)](package.json)
 
+**Languages:** English · [简体中文](./README.zh-CN.md)
+
 ---
 
 ## Features
@@ -168,14 +170,3 @@ Issues and PRs are welcome. For bugs, include the command you ran and (if possib
 ## License
 
 MIT © [kou-123](https://github.com/kou-123)
-
----
-
-## 中文简介
-
-**Runshot** 是一个零依赖的 Node.js 命令行工具：用一条命令包裹任意进程，本地捕获 **标准输出 / 标准错误 / 退出码 / 耗时**，打开浏览器时间线面板，或导出可分享的单文件 HTML 报告。适合调试失败的测试、构建和脚本，无需注册账号或接入云端可观测平台。
-
-```bash
-npx runshot -- npm test
-runshot report -o ./demo-report.html
-```
