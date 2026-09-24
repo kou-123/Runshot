@@ -27,6 +27,14 @@
   ],
   "author": "",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kou-123/Runshot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kou-123/Runshot/issues"
+  },
+  "homepage": "https://github.com/kou-123/Runshot#readme",
   "engines": {
     "node": ">=20"
   }
