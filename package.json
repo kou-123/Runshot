@@ -1,0 +1,33 @@
+{
+  "name": "runshot",
+  "version": "0.1.0",
+  "description": "Snapshot what your command really did — local run capture with a beautiful timeline UI.",
+  "type": "module",
+  "bin": {
+    "runshot": "./src/cli.js"
+  },
+  "files": [
+    "src",
+    "web",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/cli.js",
+    "test:smoke": "RUNSHOT_HOME=./.tmp-runshot node src/cli.js --no-open --no-server -- node -e \"console.log('ok'); console.error('warn')\" && RUNSHOT_HOME=./.tmp-runshot node src/cli.js list && RUNSHOT_HOME=./.tmp-runshot node src/cli.js report -o ./.tmp-runshot/report.html"
+  },
+  "keywords": [
+    "cli",
+    "observability",
+    "developer-tools",
+    "timeline",
+    "logs",
+    "debugging",
+    "zero-dependency"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Runshot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          Runshot
+          <span>Command run snapshots</span>
+        </div>
+        <div id="run-list" class="run-list"></div>
+      </aside>
+      <main class="main">
+        <div id="empty" class="empty">
+          <p>
+            Capture any command, then inspect stdout, stderr, and timing in one
+            place.
+          </p>
+          <p>Try <code>npx runshot -- echo hello</code></p>
+        </div>
+        <div id="detail" hidden>
+          <header class="hero">
+            <h1 id="cmd"></h1>
+            <div id="pills" class="pills"></div>
+          </header>
+          <div class="toolbar" id="toolbar"></div>
+          <div class="feed" id="feed"></div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
