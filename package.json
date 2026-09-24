@@ -1,7 +1,7 @@
 {
   "name": "runshot",
   "version": "0.1.0",
-  "description": "Snapshot what your command really did — local run capture with a beautiful timeline UI.",
+  "description": "Local command observability CLI: capture stdout/stderr/timing, open a timeline UI, export shareable HTML reports. Zero dependencies.",
   "type": "module",
   "bin": {
     "runshot": "./src/cli.js"
@@ -18,18 +18,31 @@
   },
   "keywords": [
     "cli",
-    "observability",
+    "command-line",
+    "devtools",
     "developer-tools",
-    "timeline",
-    "logs",
     "debugging",
-    "zero-dependency"
+    "observability",
+    "logging",
+    "stdout",
+    "stderr",
+    "timeline",
+    "html-report",
+    "local-first",
+    "zero-dependency",
+    "nodejs",
+    "test-runner",
+    "build-tools",
+    "ci",
+    "terminal",
+    "process-monitor",
+    "run-history"
   ],
-  "author": "",
+  "author": "kou-123",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kou-123/Runshot.git"
+    "url": "git+https://github.com/kou-123/Runshot.git"
   },
   "bugs": {
     "url": "https://github.com/kou-123/Runshot/issues"

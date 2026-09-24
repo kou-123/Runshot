@@ -2,35 +2,66 @@
 
 **Snapshot what your command really did.**
 
-Wrap any command. Capture stdout, stderr, timing, and exit code. Open a local timeline UI — or export a single-file HTML report you can drop into an issue or README.
+Runshot is a **zero-dependency Node.js CLI** for **local command observability**: wrap any shell command, capture **stdout / stderr / exit code / duration**, open a **local timeline UI**, and export a **shareable single-file HTML report**.
 
 ```bash
 npx runshot -- npm test
 ```
 
-Zero npm dependencies. Node.js 20+ only.
+Useful when you need a lightweight alternative to scrolling terminal buffers, digging through noisy CI logs, or setting up heavy SaaS tracing just to debug a failed script.
 
-## Why
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org/)
+[![Zero dependencies](https://img.shields.io/badge/deps-0-blue)](package.json)
 
-Terminal scrollback disappears. CI logs are noisy. SaaS tracing is heavy for a script that just failed on your laptop.
+---
 
-Runshot is **local-first**, zero accounts, one command.
+## Features
+
+- **Wrap any command** — tests, builds, Python scripts, Make targets, one-liners
+- **Local timeline UI** — filter by stdout / stderr / system events in the browser
+- **HTML report export** — drop into GitHub Issues, PRs, or READMEs
+- **Headless / CI mode** — `--no-open --no-server` for pipelines
+- **Privacy-minded** — redacts common token / secret patterns from captured streams
+- **Zero npm dependencies** — only Node.js 20+
+
+Keywords: `cli`, `command runner`, `log viewer`, `devtools`, `debugging`, `observability`, `timeline`, `stdout`, `stderr`, `html report`, `local-first`, `nodejs`
+
+---
+
+## Why Runshot?
+
+| Problem | What Runshot does |
+|--------|-------------------|
+| Terminal scrollback is gone | Persists timestamped stdout/stderr locally |
+| CI logs are huge and hard to share | Exports one HTML file you can attach or open |
+| Full APM / SaaS tracing is overkill | Local-first, no account, one command |
+| `tee` / redirect only saves text | Adds timing, status, and a visual timeline |
+
+---
 
 ## Install
 
 ```bash
-npm i -g runshot
-# or without installing:
+# one-shot (no install)
 npx runshot -- <command>
+
+# or install globally
+npm i -g runshot
 ```
 
-## Usage
+Requires **Node.js 20+**.
+
+---
+
+## Quick start
 
 ```bash
 # Capture a command and open the UI
 runshot -- npm test
 runshot -- python train.py
 runshot -- make build
+runshot -- node scripts/migrate.js
 
 # Re-open the latest run
 runshot open
@@ -46,47 +77,105 @@ runshot list
 runshot --no-open --no-server -- npm test
 ```
 
-Runs are stored under `~/.runshot/runs/` (override with `RUNSHOT_HOME`). Sensitive-looking env names and common token patterns are redacted from captured streams when possible.
+Runs are stored under `~/.runshot/runs/` (override with `RUNSHOT_HOME`).
 
-## What you get
-
-- Timestamped stdout / stderr / system events
-- Exit code, duration, cwd
-- Local web timeline (filter by stream)
-- Single-file HTML report for sharing
+---
 
 ## Demo (headless)
 
 ```bash
 runshot --no-open --no-server -- node -e "console.log('hello'); console.error('oops'); process.exit(1)"
 runshot report -o ./demo-report.html
-open ./demo-report.html   # macOS
+open ./demo-report.html   # macOS; use xdg-open on Linux
 ```
+
+---
+
+## CLI reference
+
+```text
+runshot [--no-open] [--no-server] [--port <n>] -- <command...>
+runshot open [id] [--port <n>] [--no-open]
+runshot report [id] [-o|--out <path>]
+runshot list
+runshot help
+runshot version
+```
+
+| Flag | Meaning |
+|------|---------|
+| `--no-open` | Do not open the browser |
+| `--no-server` | Do not start the local UI server |
+| `--port <n>` | Bind UI server to a fixed port |
+| `-o, --out` | Output path for HTML report |
+
+---
+
+## How it works
+
+1. Spawns your command and streams stdout/stderr with relative timestamps  
+2. Writes run metadata + events under `~/.runshot/`  
+3. Serves a small local web UI (filterable event feed)  
+4. Can render the same data as a portable HTML report  
+
+No cloud, no signup, no telemetry.
+
+---
+
+## Use cases
+
+- Debug flaky `npm test` / `pytest` / `cargo test` runs locally  
+- Share a failed build with teammates as one HTML file  
+- Keep a short history of important CLI runs on your machine  
+- Attach run reports to GitHub Issues or internal docs  
+- Light local observability without OpenTelemetry / Datadog / LangSmith  
+
+---
 
 ## Development
 
 ```bash
-git clone <your-repo-url>
-cd runshot
+git clone https://github.com/kou-123/Runshot.git
+cd Runshot
 npm run test:smoke
-node src/cli.js -- echo hello          # opens UI
+node src/cli.js -- echo hello
 node src/cli.js open --no-open --port 3920
 ```
 
-## Launch checklist (for stars)
+Project layout:
 
-1. Create the GitHub repo and push this code
-2. Add Topics: `cli`, `developer-tools`, `observability`, `nodejs`, `zero-dependency`
-3. Record a 10–15s GIF: terminal command → browser timeline
-4. Post Show HN / Reddit r/commandline / V2EX with the GIF
-5. Follow up with a GitHub Action that uploads `runshot report` as a CI artifact
+```text
+src/     CLI, runner, store, local server, HTML report
+web/     Local timeline UI (vanilla HTML/CSS/JS)
+```
+
+---
 
 ## Roadmap
 
-- Python / Node span SDK
-- GitHub Action for HTML report artifacts
-- Optional “why did this fail?” on top of the captured timeline
+- [ ] Python / Node span SDK for function-level traces  
+- [ ] GitHub Action that uploads HTML reports as CI artifacts  
+- [ ] Optional “why did this fail?” hints on top of captured timelines  
+
+---
+
+## Contributing
+
+Issues and PRs are welcome. For bugs, include the command you ran and (if possible) a `runshot report` HTML snippet with secrets removed.
+
+---
 
 ## License
 
-MIT
+MIT © [kou-123](https://github.com/kou-123)
+
+---
+
+## 中文简介
+
+**Runshot** 是一个零依赖的 Node.js 命令行工具：用一条命令包裹任意进程，本地捕获 **标准输出 / 标准错误 / 退出码 / 耗时**，打开浏览器时间线面板，或导出可分享的单文件 HTML 报告。适合调试失败的测试、构建和脚本，无需注册账号或接入云端可观测平台。
+
+```bash
+npx runshot -- npm test
+runshot report -o ./demo-report.html
+```
